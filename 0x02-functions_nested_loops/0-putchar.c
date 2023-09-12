@@ -1,7 +1,8 @@
 #include "main.h"
+
 /**
 *main - function prints text as output
-*Return: Alwys return 0
+*Return:return 0
 */
 
 int main(void)
@@ -17,4 +18,3 @@ int main(void)
 	_putchar('\n');
 	return (0);
 }
-
