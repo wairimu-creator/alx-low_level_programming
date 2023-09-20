@@ -2,10 +2,11 @@
 
 /**
  * _print_rev_recursion - prints a string.
- *@s: sourcr string
+ * @s: string pointer
  *
- * Return: the string printed.
-**/
+ * Return: the string that will be printed
+ */
+
 void _print_rev_recursion(char *s)
 {
 	if (*s == '\0')
