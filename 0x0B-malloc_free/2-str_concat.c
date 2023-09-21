@@ -3,10 +3,11 @@
 
 /**
  * str_concat - concatenates 2 strings
- * @s1: char 1
- * @s2: char 2
+ * @s1: pointer to string
+ * @s2: pointer to string
  *
- * Return: pointer to new string created (success)
+ * Return: pointer to newly allocated memory
+ * which has s1, s2 and null byte (success)
  * or NULL (Error)
  */
 
@@ -20,7 +21,7 @@ char *str_concat(char *s1, char *s2)
 	while (s2 && s2[len2])
 		len2++;
 
-	res = malloc(len2 * sizeof(char));
+	res = malloc(sizeof(char) * (len1 + len2 + 1));
 	if (res == NULL)
 		return (NULL);
 
@@ -31,6 +32,14 @@ char *str_concat(char *s1, char *s2)
 	{
 		while (i < len1)
 		{
+			res[i] = s1[i];
+			i++;
+		}
+	}
+	if (s2)
+	{
+		while (i < (len1 + len2))
+		{
 			res[i] = s2[j];
 			i++;
 			j++;
@@ -39,4 +48,3 @@ char *str_concat(char *s1, char *s2)
 	res[i] = '\0';
 	return (res);
 }
-
