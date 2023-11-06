@@ -3,80 +3,79 @@
 #include "dog.h"
 
 /**
- * new_dog - creates a new dog
- * @name: the name of the dog
- * @age: the age of the dog
- * @owner: the owner of the dog
- *
- * Return: a pointer to the new dog, or NULL if failed
- */
-dog_t *new_dog(char *name, float age, char *owner)
+* _stflen - a function that gets a length of string
+*
+*@str: the string to get the length
+*
+*Return: length of the @str
+*/
+
+int _strlen(const char *str)
 {
-	dog_t *new_dog;
-	char *name_copy;
-	char *owner_copy;
+	int length = 0;
 
-    /* Allocate memory for the dog structure */
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL)
-		return NULL;
-
-    /* Allocate memory for name and owner */
-	name_copy = malloc(strlen(name) + 1);
-	if (name_copy == NULL)
-	
-		free(new_dog);
-		return NULL;
-
-	owner_copy = malloc(strlen(owner) + 1);
-	if (owner_copy == NULL)
-	
-		free(name_copy);
-		free(new_dog);
-		return NULL;
-	
-
-    /* Copy the name and owner strings into the allocated memory */
-	strcpy(name_copy, name);
-	strcpy(owner_copy, owner);
-
-    /* Set the dog's properties */
-	
-		new_dog->name = name_copy;
-		new_dog->age = age;
-		new_dog->owner = owner_copy;
-	
-	return new_dog;
-	
+        while (*str++)
+              length++;
+        return (length);
 }
-void free_dog(dog_t *dog)
-{
-	if (dog != NULL)
-	{
-		free(dog->name);
-		free(dog->owner);
-		free(dog);
-	}
-}
-#ifndef DOG_H
-#define DOG_H
 
 /**
- * struct dog - structure to represent a dog
- * @name: the name of the dog
- * @age: the age of the dog
- * @owner: the owner of the dog
- */
-typedef struct dog
+* _strcopy - a function that returns @dest with a copy of a string from @src
+* @src: string to copy
+* @dest: copy string to here
+*
+*Return: @dest
+*/
+
+char *_strcopy(char *dest, char *src)
 {
-	char *name;
-	float age;
-	char *owner;
-} dog_t;
+	int i;
 
-dog_t *new_dog(char *name, float age, char *owner);
+        for (i = 0; src[i]; i++)
+		dest[i] = src[i];
+        dest[i] = '\0';
+}
 
-#endif /* DOG_H */
+/**
+* new_dog - a function that creates a new dog
+* @name: name of dog
+* @age: age of the dog
+* @owner: owner of the dog 
+*
+* Return: struct pointer dog. NULL if it fails
+*/
+
+dog_t *new_dog(char *name, float age, char *owner)
+{
+	dog_t *dog;
+
+        if (!name || age < 0 || !owner)
+		return (NULL);
+dog = (dog_t *) malloc(sizeof(dog_t));
+if (dog == NULL)
+	return (NULL);
+
+dog->name = malloc(sizeof(char) * (_strlen(name) + 1));
+if ((*dog).name == NULL)
+{
+      free(dog);
+      return (NULL);
+}
+
+dog->owner = malloc(sizeof(char) * (_strlen(owner) + 1));
+if ((*dog).owner == NULL)
+{
+       free(dog->name);
+       free(dog);
+       return (NULL);
+}
+
+dog->name = _strcopy(dog->name, name);
+dog->age = age;
+dog->owner = _strcopy(dog->owner, owner);
+
+return (dog);
+}
 
 
 
